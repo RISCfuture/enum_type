@@ -16,9 +16,9 @@ module EnumType
   #   @param [Symbol] field An enumerated field.
   #   @param [Hash] options A hash of options.
   #   @option options [true, false] :allow_nil (false) If @true@, a nil value
-  #   is allowed.
+  #     is allowed.
   #   @option options [Array<String>] :values If given, restricts valid values
-  #   to those in the given array.
+  #     to those in the given array.
   #
   # @example Enumerated field with restricted types
   #   enum_type :color, values: %w( red orange yellow green blue purple )

@@ -42,4 +42,4 @@ class MyModel < ActiveRecord::Base
 end
 </code></pre>
 
-See the @enum_type@ method documentation for more information.
+See the {EnumType#enum_type} method documentation for more information.
