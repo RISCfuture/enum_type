@@ -1,6 +1,4 @@
-Bundler.require :default, :test
-require "#{File.dirname __FILE__}/../lib/enum_type"
-require 'factories'
+require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 module SpecSupport
   class EnumTypeTester

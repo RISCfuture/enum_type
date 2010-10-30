@@ -20,7 +20,9 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::GemcutterTasks.new
 
-desc "Build API documentation"
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new
+
 YARD::Rake::YardocTask.new('doc') do |doc|
   doc.options << "-m" << "textile"
   doc.options << "--protected"
@@ -31,16 +33,4 @@ YARD::Rake::YardocTask.new('doc') do |doc|
   doc.files = [ 'lib/**/*', 'README.textile' ]
 end
 
-require 'rspec/core/rake_task'
-
-desc 'Run all RSpecs'
 task(default: :spec)
-
-desc 'Run all RSpecs'
-RSpec::Core::RakeTask.new
-
-desc "Generate code coverage"
-RSpec::Core::RakeTask.new(:coverage) do |t|
-  t.rcov = true
-  t.rcov_opts = %w( --exclude spec )
-end
