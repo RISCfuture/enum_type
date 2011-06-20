@@ -1,9 +1,11 @@
+require 'enum_type/extensions'
+
 # Adds the @enum_type@ method to a model.
 #
 # @example Basic usage
 #   class MyModel < ActiveRecord::Base
 #     extend EnumType
-#     enum_type :status, %w( open closed flagged deleted )
+#     enum_type :status, values: %w( open closed flagged deleted )
 #   end
 
 module EnumType
@@ -16,9 +18,9 @@ module EnumType
   #   @param [Symbol] field An enumerated field.
   #   @param [Hash] options A hash of options.
   #   @option options [true, false] :allow_nil (false) If @true@, a nil value
-  #     is allowed.
+  #   is allowed.
   #   @option options [Array<String>] :values If given, restricts valid values
-  #     to those in the given array.
+  #   to those in the given array.
   #
   # @example Enumerated field with restricted types
   #   enum_type :color, values: %w( red orange yellow green blue purple )
@@ -36,7 +38,7 @@ module EnumType
       end
 
       validates_presence_of(field) unless options[:allow_nil]
-      validates_inclusion_of(field, in: options[:values]) if options[:values]
+      validates_inclusion_of(field, in: options[:values].map(&:to_sym), allow_nil: options[:allow_nil]) if options[:values]
     end
   end
 end

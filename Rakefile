@@ -6,7 +6,7 @@ rescue LoadError
   exit 1
 end
 
-Bundler.require :default
+Bundler.require :default, :development
 
 Jeweler::Tasks.new do |gem|
   gem.name = "enum_type"
@@ -28,7 +28,7 @@ YARD::Rake::YardocTask.new('doc') do |doc|
   doc.options << "--protected"
   doc.options << "-r" << "README.textile"
   doc.options << "-o" << "doc"
-  doc.options << "--title" << "enum_type Documentation".inspect
+  doc.options << "--title" << "enum_type Documentation"
   
   doc.files = [ 'lib/**/*', 'README.textile' ]
 end

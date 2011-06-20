@@ -1,16 +1,17 @@
 source 'http://rubygems.org'
 
 # DEPENDENCIES
-gem 'activerecord', require: 'active_record'
-gem 'activesupport', require: 'active_support/core_ext/object/try'
+gem 'activerecord', '>= 3.0', require: 'active_record'
+gem 'activesupport', '>= 3.0', require: 'active_support/core_ext/object/try'
 
-# DEVELOPMENT
-gem 'jeweler'
-gem 'yard'
-gem 'RedCloth', require: 'redcloth'
+group :development do
+  # DEVELOPMENT
+  gem 'jeweler'
+  gem 'yard'
+  gem 'RedCloth', require: 'redcloth'
 
-# TEST
-gem 'rspec'
-group :test do
+  # TEST
+  gem 'rspec'
   gem 'factory_girl'
+  gem 'pg'
 end
