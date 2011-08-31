@@ -23,5 +23,6 @@ RSpec.configure do |config|
     Model.connection.execute "DROP TYPE IF EXISTS state_type"
     Model.connection.execute "CREATE TYPE state_type AS ENUM ('pending', 'processing', 'completed', 'failed')"
     Model.connection.execute "CREATE TABLE models (id SERIAL PRIMARY KEY, state state_type DEFAULT 'pending')"
+    Model.connection.reconnect!
   end
 end
