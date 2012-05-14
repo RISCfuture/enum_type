@@ -7,7 +7,7 @@ require 'factories'
 require 'enum_type'
 
 ActiveRecord::Base.establish_connection(
-  adapter: 'postgresql',
+  adapter: (defined?(JRuby) ? 'jdbcpostgresql' : 'postgresql'),
   database: 'enum_type_test',
   username: 'enum_type_tester'
 )

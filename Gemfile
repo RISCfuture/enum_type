@@ -13,5 +13,6 @@ group :development do
   # TEST
   gem 'rspec'
   gem 'factory_girl'
-  gem 'pg'
+  platform(:mri) { gem 'pg' }
+  platform(:jruby) { gem 'activerecord-jdbcpostgresql-adapter' }
 end
