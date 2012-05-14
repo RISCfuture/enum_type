@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{enum_type}
-  s.version = "2.0.0"
+  s.name = "enum_type"
+  s.version = "2.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Tim Morgan}]
-  s.date = %q{2011-06-20}
-  s.description = %q{Allows ActiveRecord to better use PostgreSQL's ENUM types.}
-  s.email = %q{git@timothymorgan.info}
+  s.authors = ["Tim Morgan"]
+  s.date = "2012-05-14"
+  s.description = "Allows ActiveRecord to better use PostgreSQL's ENUM types."
+  s.email = "git@timothymorgan.info"
   s.extra_rdoc_files = [
     "LICENSE",
     "README.textile"
@@ -32,11 +32,11 @@ Gem::Specification.new do |s|
     "spec/factories.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/riscfuture/enum_type}
-  s.require_paths = [%q{lib}]
+  s.homepage = "http://github.com/riscfuture/enum_type"
+  s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9")
-  s.rubygems_version = %q{1.8.5}
-  s.summary = %q{PostgreSQL enumerated types in ActiveRecord}
+  s.rubygems_version = "1.8.24"
+  s.summary = "PostgreSQL enumerated types in ActiveRecord"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
       s.add_development_dependency(%q<pg>, [">= 0"])
+      s.add_development_dependency(%q<activerecord-jdbcpostgresql-adapter>, [">= 0"])
       s.add_runtime_dependency(%q<activerecord>, [">= 0"])
     else
       s.add_dependency(%q<activerecord>, [">= 3.0"])
@@ -60,6 +61,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<factory_girl>, [">= 0"])
       s.add_dependency(%q<pg>, [">= 0"])
+      s.add_dependency(%q<activerecord-jdbcpostgresql-adapter>, [">= 0"])
       s.add_dependency(%q<activerecord>, [">= 0"])
     end
   else
@@ -71,6 +73,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<factory_girl>, [">= 0"])
     s.add_dependency(%q<pg>, [">= 0"])
+    s.add_dependency(%q<activerecord-jdbcpostgresql-adapter>, [">= 0"])
     s.add_dependency(%q<activerecord>, [">= 0"])
   end
 end
