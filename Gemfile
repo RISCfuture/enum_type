@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 # DEPENDENCIES
 gem 'activerecord', '>= 3.0', require: 'active_record'

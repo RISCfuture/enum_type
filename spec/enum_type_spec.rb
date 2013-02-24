@@ -67,7 +67,7 @@ describe EnumType do
 
     context "[validations]" do
       before :each do
-        @field = Factory.next(:enum_field)
+        @field = FactoryGirl.generate(:enum_field)
         SpecSupport::EnumTypeTester.set_field(@field)
         @model = SpecSupport::EnumTypeTester.new
       end
