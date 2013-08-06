@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "enum_type"
-  s.version = "2.1.0"
+  s.version = "2.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tim Morgan"]
-  s.date = "2012-05-14"
+  s.date = "2013-08-06"
   s.description = "Allows ActiveRecord to better use PostgreSQL's ENUM types."
   s.email = "git@timothymorgan.info"
   s.extra_rdoc_files = [
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rspec",
+    ".ruby-gemset",
+    ".ruby-version",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
@@ -35,15 +37,15 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/riscfuture/enum_type"
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9")
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "2.0.6"
   s.summary = "PostgreSQL enumerated types in ActiveRecord"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, [">= 3.0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 4.0"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 4.0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<yard>, [">= 0"])
       s.add_development_dependency(%q<RedCloth>, [">= 0"])
@@ -53,8 +55,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<activerecord-jdbcpostgresql-adapter>, [">= 0"])
       s.add_runtime_dependency(%q<activerecord>, [">= 0"])
     else
-      s.add_dependency(%q<activerecord>, [">= 3.0"])
-      s.add_dependency(%q<activesupport>, [">= 3.0"])
+      s.add_dependency(%q<activerecord>, [">= 4.0"])
+      s.add_dependency(%q<activesupport>, [">= 4.0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<yard>, [">= 0"])
       s.add_dependency(%q<RedCloth>, [">= 0"])
@@ -65,8 +67,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<activerecord>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activerecord>, [">= 3.0"])
-    s.add_dependency(%q<activesupport>, [">= 3.0"])
+    s.add_dependency(%q<activerecord>, [">= 4.0"])
+    s.add_dependency(%q<activesupport>, [">= 4.0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<yard>, [">= 0"])
     s.add_dependency(%q<RedCloth>, [">= 0"])
