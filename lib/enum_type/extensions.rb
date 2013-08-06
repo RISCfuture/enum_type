@@ -4,11 +4,19 @@ require 'active_record/connection_adapters/postgresql_adapter'
 # Patch the PostgreSQL adapter to recognize defaults on ENUM columns.
 
 class ActiveRecord::ConnectionAdapters::PostgreSQLColumn
-  def initialize(name, default, sql_type = nil, null = true)
-    super(name, self.class.extract_value_from_default(default, sql_type), sql_type, null)
+  def initialize(name, default, oid_type, sql_type = nil, null = true)
+    @oid_type = oid_type
+    if sql_type =~ /\[\]$/
+      @array = true
+      super(name, self.class.extract_value_from_default(default, sql_type), sql_type[0..sql_type.length - 3], null)
+    else
+      @array = false
+      super(name, self.class.extract_value_from_default(default, sql_type), sql_type, null)
+    end
   end
 
-  def self.extract_value_from_default_with_enum(default, type)
+  def self.extract_value_from_default_with_enum(default, type=nil)
+    return extract_value_from_default_without_enum(default) unless type
     case default
       when /\A'(.*)'::(?:#{Regexp.escape type})\z/
         $1

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # DEPENDENCIES
-gem 'activerecord', '>= 3.0', require: 'active_record'
-gem 'activesupport', '>= 3.0', require: 'active_support/core_ext/object/try'
+gem 'activerecord', '>= 4.0', require: 'active_record'
+gem 'activesupport', '>= 4.0', require: 'active_support/core_ext/object/try'
 
 group :development do
   # DEVELOPMENT
