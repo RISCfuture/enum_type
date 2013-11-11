@@ -1,7 +1,7 @@
 h1. enum_type -- Enumerated Types in ActiveRecord
 
 | *Author* | Tim Morgan |
-| *Version* | 2.1 (May 14, 2012) |
+| *Version* | 2.1.2 (Nov 10, 2013) |
 | *License* | Released under the MIT license. |
 
 h2. About
