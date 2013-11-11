@@ -4,15 +4,21 @@ require 'active_record/connection_adapters/postgresql_adapter'
 # Patch the PostgreSQL adapter to recognize defaults on ENUM columns.
 
 class ActiveRecord::ConnectionAdapters::PostgreSQLColumn
+
   def initialize(name, default, oid_type, sql_type = nil, null = true)
-    @oid_type = oid_type
+    @oid_type     = oid_type
+    default_value = self.class.extract_value_from_default(default, sql_type)
+
     if sql_type =~ /\[\]$/
       @array = true
-      super(name, self.class.extract_value_from_default(default, sql_type), sql_type[0..sql_type.length - 3], null)
+      super(name, default_value, sql_type[0..sql_type.length - 3], null)
     else
       @array = false
-      super(name, self.class.extract_value_from_default(default, sql_type), sql_type, null)
+      super(name, default_value, sql_type, null)
     end
+
+    @default_function = default if has_default_function?(default_value, default)
+    @type ||= :string #TODO this is scary
   end
 
   def self.extract_value_from_default_with_enum(default, type=nil)
@@ -33,7 +39,7 @@ end if ActiveRecord::ConnectionAdapters::PostgreSQLColumn.methods.include?(:extr
 class ActiveRecord::ConnectionAdapters::JdbcColumn
   def initialize(config, name, default, *args)
     call_discovered_column_callbacks(config)
-    super(name,enum_default_value(default, args.first),*args)
+    super(name, enum_default_value(default, args.first), *args)
     init_column(name, default, *args)
   end
 
