@@ -37,12 +37,12 @@ describe EnumType do
     context "[getter]" do
       it "should return a symbol" do
         Model.connection.execute "INSERT INTO models (state) VALUES ('completed')"
-        Model.last.state.should eql(:completed)
+        expect(Model.last.state).to eql(:completed)
       end
       
       it "should return nil if the value is nil" do
         Model.connection.execute "INSERT INTO models (state) VALUES (NULL)"
-        Model.last.state.should be_nil
+        expect(Model.last.state).to be_nil
       end
     end
 
@@ -50,18 +50,18 @@ describe EnumType do
       it "should typecast the value to a string" do
         m = Model.new
         m.state = :failed
-        m.state.should eql(:failed)
+        expect(m.state).to eql(:failed)
         m.save!
-        m.reload.state.should eql(:failed)
-        m.state_before_type_cast.should eql('failed')
+        expect(m.reload.state).to eql(:failed)
+        expect(m.state_before_type_cast).to eql('failed')
       end
       
       it "should leave nil as nil" do
         m = Model.new
         m.state = nil
-        m.state.should eql(nil)
+        expect(m.state).to eql(nil)
         m.save!
-        m.reload.state.should be_nil
+        expect(m.reload.state).to be_nil
       end
     end
 
@@ -75,34 +75,34 @@ describe EnumType do
       it "should validate inclusion if :values option is given" do
         SpecSupport::EnumTypeTester.enum_type @field, values: [ :a, :b ]
         @model.send :"#{@field}=", :a
-        @model.get.should eql('a')
-        @model.should be_valid
+        expect(@model.get).to eql('a')
+        expect(@model).to be_valid
         @model.send :"#{@field}=", :c
-        @model.should_not be_valid
+        expect(@model).not_to be_valid
       end
 
       it "should not validate presence if :allow_nil is true" do
         pending "Doesn't work"
         SpecSupport::EnumTypeTester.enum_type @field, allow_nil: true
         @model.send :"#{@field}=", nil
-        @model.should be_valid
+        expect(@model).to be_valid
       end
       
       it "should validate presence if :allow_nil is not given" do
         SpecSupport::EnumTypeTester.enum_type @field
         @model.send :"#{@field}=", nil
-        @model.should_not be_valid
+        expect(@model).not_to be_valid
       end
       
       it "should validate presence if :allow_nil is false" do
         SpecSupport::EnumTypeTester.enum_type @field, allow_nil: false
         @model.send :"#{@field}=", nil
-        @model.should_not be_valid
+        expect(@model).not_to be_valid
       end
     end
     
     it "should determine the correct column default" do
-      Model.columns.detect { |c| c.name == 'state' }.default.should eql('pending')
+      expect(Model.columns.detect { |c| c.name == 'state' }.default).to eql('pending')
     end
   end
 end
