@@ -1,6 +1,6 @@
 require 'enum_type/extensions'
 
-# Adds the @enum_type@ method to a model.
+# Adds the `enum_type` method to a model.
 #
 # @example Basic usage
 #   class MyModel < ActiveRecord::Base
@@ -17,7 +17,7 @@ module EnumType
   # @overload enum_type(field, ..., options={})
   #   @param [Symbol] field An enumerated field.
   #   @param [Hash] options A hash of options.
-  #   @option options [true, false] :allow_nil (false) If @true@, a nil value
+  #   @option options [true, false] :allow_nil (false) If `true`, a `nil` value
   #   is allowed.
   #   @option options [Array<String>] :values If given, restricts valid values
   #   to those in the given array.

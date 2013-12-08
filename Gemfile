@@ -8,11 +8,11 @@ group :development do
   # DEVELOPMENT
   gem 'jeweler'
   gem 'yard'
-  gem 'RedCloth', require: 'redcloth'
+  gem 'redcarpet', require: nil
 
   # TEST
   gem 'rspec'
   gem 'factory_girl'
-  platform(:mri) { gem 'pg' }
-  platform(:jruby) { gem 'activerecord-jdbcpostgresql-adapter' }
+  gem 'pg', platform: :mri
+  gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
 end

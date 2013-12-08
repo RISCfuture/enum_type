@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tim Morgan"]
-  s.date = "2013-11-11"
+  s.date = "2013-12-08"
   s.description = "Allows ActiveRecord to better use PostgreSQL's ENUM types."
   s.email = "git@timothymorgan.info"
   s.extra_rdoc_files = [
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/riscfuture/enum_type"
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9")
-  s.rubygems_version = "2.1.10"
+  s.rubygems_version = "2.1.11"
   s.summary = "PostgreSQL enumerated types in ActiveRecord"
 
   if s.respond_to? :specification_version then

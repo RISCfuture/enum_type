@@ -1,8 +1,9 @@
 require 'active_support/core_ext/module/aliasing'
 require 'active_record/connection_adapters/postgresql_adapter'
 
-# Patch the PostgreSQL adapter to recognize defaults on ENUM columns.
+# Patch the PostgreSQL adapter to recognize defaults on `ENUM` columns.
 
+# @private
 class ActiveRecord::ConnectionAdapters::PostgreSQLColumn
 
   def initialize(name, default, oid_type, sql_type = nil, null = true)
@@ -36,6 +37,7 @@ class ActiveRecord::ConnectionAdapters::PostgreSQLColumn
   end
 end if ActiveRecord::ConnectionAdapters::PostgreSQLColumn.methods.include?(:extract_value_from_default)
 
+# @private
 class ActiveRecord::ConnectionAdapters::JdbcColumn
   def initialize(config, name, default, *args)
     call_discovered_column_callbacks(config)
