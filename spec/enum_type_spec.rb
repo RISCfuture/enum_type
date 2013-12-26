@@ -4,7 +4,7 @@ module SpecSupport
   class EnumTypeTester
     include ActiveModel::Validations
     extend EnumType
-    
+
     def self.set_field(field)
       @field = field
       reset_callbacks :validate
@@ -39,7 +39,7 @@ describe EnumType do
         Model.connection.execute "INSERT INTO models (state) VALUES ('completed')"
         expect(Model.last.state).to eql(:completed)
       end
-      
+
       it "should return nil if the value is nil" do
         Model.connection.execute "INSERT INTO models (state) VALUES (NULL)"
         expect(Model.last.state).to be_nil
@@ -48,16 +48,16 @@ describe EnumType do
 
     context "[setter]" do
       it "should typecast the value to a string" do
-        m = Model.new
+        m       = Model.new
         m.state = :failed
         expect(m.state).to eql(:failed)
         m.save!
         expect(m.reload.state).to eql(:failed)
         expect(m.state_before_type_cast).to eql('failed')
       end
-      
+
       it "should leave nil as nil" do
-        m = Model.new
+        m       = Model.new
         m.state = nil
         expect(m.state).to eql(nil)
         m.save!
