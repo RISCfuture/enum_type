@@ -71,9 +71,9 @@ describe EnumType do
         SpecSupport::EnumTypeTester.set_field(@field)
         @model = SpecSupport::EnumTypeTester.new
       end
-      
+
       it "should validate inclusion if :values option is given" do
-        SpecSupport::EnumTypeTester.enum_type @field, values: [ :a, :b ]
+        SpecSupport::EnumTypeTester.enum_type @field, values: [:a, :b]
         @model.send :"#{@field}=", :a
         expect(@model.get).to eql('a')
         expect(@model).to be_valid
@@ -87,20 +87,34 @@ describe EnumType do
         @model.send :"#{@field}=", nil
         expect(@model).to be_valid
       end
-      
+
       it "should validate presence if :allow_nil is not given" do
         SpecSupport::EnumTypeTester.enum_type @field
         @model.send :"#{@field}=", nil
         expect(@model).not_to be_valid
       end
-      
+
       it "should validate presence if :allow_nil is false" do
         SpecSupport::EnumTypeTester.enum_type @field, allow_nil: false
         @model.send :"#{@field}=", nil
         expect(@model).not_to be_valid
       end
     end
-    
+
+    context '[:register_type option]' do
+      before(:each) { @field = FactoryGirl.generate(:enum_field) }
+
+      it "should register each new PostgreSQL type with ActiveRecord when set" do
+        expect(Model.connection).
+          to receive(:select_one).once.
+               with(/SELECT atttypid FROM pg_catalog.pg_attribute WHERE attrelid = 'models'::regclass AND attname = '#{@field}'/).
+               and_return('atttypid' => '12345')
+        Model.enum_type @field, register_type: true
+        expect(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::TYPE_MAP[12345]).
+          to be_kind_of(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::Identity)
+      end
+    end
+
     it "should determine the correct column default" do
       expect(Model.columns.detect { |c| c.name == 'state' }.default).to eql('pending')
     end
