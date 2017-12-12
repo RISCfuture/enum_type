@@ -1,4 +1,4 @@
 require 'factory_girl'
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:enum_field) { |i| :"field#{i}" }
 end

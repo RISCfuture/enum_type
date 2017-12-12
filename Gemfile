@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
 # DEPENDENCIES
-gem 'activerecord', '>= 4.0', require: 'active_record'
-gem 'activesupport', '>= 4.0', require: 'active_support/core_ext/object/try'
+gem 'rails', '~> 4'
 
 group :development do
   # DEVELOPMENT
@@ -12,7 +11,7 @@ group :development do
 
   # TEST
   gem 'rspec'
-  gem 'factory_girl'
+  gem 'factory_bot'
   gem 'pg', platform: :mri
   gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
 end

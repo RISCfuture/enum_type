@@ -12,7 +12,9 @@ module SpecSupport
       enum_type @field
     end
 
-    def self.field() @field end
+    def self.field()
+      @field
+    end
 
     def read_attribute(_)
       instance_variable_get :"@#{self.class.field}"
@@ -67,7 +69,7 @@ describe EnumType do
 
     context "[validations]" do
       before :each do
-        @field = FactoryGirl.generate(:enum_field)
+        @field = FactoryBot.generate(:enum_field)
         SpecSupport::EnumTypeTester.set_field(@field)
         @model = SpecSupport::EnumTypeTester.new
       end
@@ -102,16 +104,18 @@ describe EnumType do
     end
 
     context '[:register_type option]' do
-      before(:each) { @field = FactoryGirl.generate(:enum_field) }
+      before(:each) { @field = FactoryBot.generate(:enum_field) }
 
       it "should register each new PostgreSQL type with ActiveRecord when set" do
         expect(Model.connection).
-          to receive(:select_one).once.
-               with(/SELECT atttypid FROM pg_catalog.pg_attribute WHERE attrelid = 'models'::regclass AND attname = '#{@field}'/).
-               and_return('atttypid' => '12345')
+            to receive(:select_one).once.
+                with(/SELECT atttypid FROM pg_catalog.pg_attribute WHERE attrelid = 'models'::regclass AND attname = '#{@field}'/).
+                and_return('atttypid' => '12345')
         Model.enum_type @field, register_type: true
-        expect(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::TYPE_MAP[12345]).
-          to be_kind_of(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::Identity)
+        if ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID.const_defined?(:TYPE_MAP)
+          expect(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::TYPE_MAP[12345]).
+              to be_kind_of(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::Identity)
+        end
       end
     end
 
